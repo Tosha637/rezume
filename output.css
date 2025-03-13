@@ -1329,10 +1329,10 @@
     background-image: url('/img');
   }
   .bg-\[url\(\'\/img\/1\.jpg\'\)\] {
-    background-image: url('/img/1.jpg');
+    background-image: url('img/1.jpg');
   }
   .bg-\[url\(\'\/img\/2\.jpg\'\)\] {
-    background-image: url('/img/2.jpg');
+    background-image: url('img/2.jpg');
   }
   .bg-none {
     background-image: none;
