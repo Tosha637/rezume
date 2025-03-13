@@ -1,0 +1,16 @@
+@import "tailwindcss";
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+.project-card {
+    transition: transform 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+}
+.skill-bar {
+    height: 8px;
+    border-radius: 4px;
+}
