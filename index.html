@@ -60,6 +60,7 @@
 				opacity: 1;
 			}
 		</style>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	</head>
 	<body>
 		<!-- Header Section -->
@@ -615,7 +616,61 @@
 				</div>
 			</div>
 		</section>
-
+		<section id="career" class="py-16 bg-white">
+			<div class="container mx-auto px-4 py-12 max-w-6xl">
+				<div class="bg-white rounded-lg shadow-md p-6 mb-8">
+					<h1 class="text-3xl font-bold text-center mb-2 text-gray-800">Карьерный путь архитектора</h1>
+					<p class="text-center text-gray-600 mb-8">Прогрессивный рост профессионала в архитектуре</p>
+					
+					<!-- График Chart.js -->
+				<div class="h-96 mb-8">
+					<canvas id="careerChart"></canvas>
+				</div>
+				
+				<!-- Карточки с описанием -->
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<div class="bg-green-200 p-4 rounded-lg border-l-4 border-green-300">
+						<h3 class="font-bold text-lg mb-1">Помощник архитектора</h3>
+						<div class="text-sm text-green-800 mb-2">2025</div>
+						<p class="text-gray-700 text-sm">Работа под руководством опытных специалистов, освоение базовых навыков проектирования.</p>
+					</div>
+					
+					<div class="bg-green-500 p-4 rounded-lg border-l-4 border-green-600">
+						<h3 class="font-bold text-lg mb-1">Архитектор 3 категории</h3>
+						<div class="text-sm text-green-800 mb-2">2030</div>
+						<p class="text-gray-700 text-sm">Самостоятельная работа над проектами среднего масштаба, развитие собственного стиля.</p>
+					</div>
+					
+					<div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
+						<h3 class="font-bold text-lg mb-1">Архитектор 2 категории</h3>
+						<div class="text-sm text-blue-800 mb-2">2035</div>
+						<p class="text-gray-700 text-sm">Руководство проектными группами, работа над сложными и масштабными объектами.</p>
+					</div>
+					
+					<div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
+						<h3 class="font-bold text-lg mb-1">Архитектор 1 категории</h3>
+						<div class="text-sm text-blue-800 mb-2">2040</div>
+						<p class="text-gray-700 text-sm">Определение архитектурной политики компании, руководство всеми архитектурными решениями.</p>
+					</div>
+					
+					<div class="bg-purple-500 p-4 rounded-lg border-l-4 border-purple-600">
+						<h3 class="font-bold text-lg mb-1">Архитектурный директор</h3>
+						<div class="text-sm text-purple-800 mb-2">2045</div>
+						<p class="text-gray-700 text-sm">Стратегическое планирование, участие в формировании архитектурных трендов.</p>
+					</div>
+					
+					<div class="bg-yellow-500 p-4 rounded-lg border-l-4 border-yellow-600">
+						<h3 class="font-bold text-lg mb-1">Пенсия</h3>
+						<div class="text-sm text-yellow-800 mb-2">2066</div>
+						<p class="text-gray-700 text-sm">Консультационная деятельность, участие в экспертных советах, преподавание.</p>
+					</div>
+				</div>
+				
+				<div class="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+					<p class="text-center text-gray-700 italic">Инвестируйте в свое профессиональное развитие сегодня — стройте карьеру так же тщательно, как проектируете здания!</p>
+				</div>
+			</div>
+		</div>
 		<!-- Contact Section -->
 		<section id="contact" class="py-16 bg-blue-50">
 			<div class="container mx-auto px-4">
@@ -652,5 +707,85 @@
 				<p class="mt-2 text-gray-400">Портфолио Архитектора</p>
 			</div>
 		</footer>
+		<script>
+			// Данные для графика
+			const years = [2025, 2030, 2035, 2040, 2045, 2066];
+			const positions = ['Помощник архитектора', 'Архитектор 3 категории', 'Архитектор 2 категории', 'Архитектор 1 категории', 'Архитектурный директор', 'Пенсия'];
+			const levels = [1, 2, 3, 4, 5, 6]; // Уровни для визуализации роста
+			
+			// Создание графика
+			const ctx = document.getElementById('careerChart').getContext('2d');
+			const careerChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: years,
+					datasets: [{
+						label: 'Карьерный рост архитектора',
+						data: levels,
+						backgroundColor: [
+							'rgba(72, 187, 120, 0.2)',
+							'rgba(72, 187, 120, 0.4)',
+							'rgba(66, 153, 225, 0.2)',
+							'rgba(66, 153, 225, 0.4)',
+							'rgba(159, 122, 234, 0.2)',
+							'rgba(236, 201, 75, 0.2)'
+						],
+						borderColor: 'rgba(66, 153, 225, 1)',
+						borderWidth: 3,
+						pointBackgroundColor: [
+							'rgba(72, 187, 120, 1)',
+							'rgba(72, 187, 120, 1)',
+							'rgba(66, 153, 225, 1)',
+							'rgba(66, 153, 225, 1)',
+							'rgba(159, 122, 234, 1)',
+							'rgba(236, 201, 75, 1)'
+						],
+						pointBorderColor: '#fff',
+						pointBorderWidth: 2,
+						pointRadius: 6,
+						fill: true,
+						tension: 0.3
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						tooltip: {
+							callbacks: {
+								label: function(context) {
+									return positions[context.dataIndex];
+								}
+							}
+						},
+						legend: {
+							display: false
+						}
+					},
+					scales: {
+						y: {
+							beginAtZero: true,
+							max: 7,
+							ticks: {
+								callback: function(value) {
+									if (value <= 6 && value >= 1 && Number.isInteger(value)) {
+										return positions[value-1];
+									}
+									return '';
+								}
+							},
+							grid: {
+								color: 'rgba(0, 0, 0, 0.05)'
+							}
+						},
+						x: {
+							grid: {
+								color: 'rgba(0, 0, 0, 0.05)'
+							}
+						}
+					}
+				}
+			});
+		</script>
 	</body>
 </html>
