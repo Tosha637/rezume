@@ -1,791 +1,938 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Портфолио Архитектора - Евдокимова Зоя</title>
-		<link rel="stylesheet" href="output.css" />
-		<style>
-			body {
-				font-family: "Helvetica Neue", Arial, sans-serif;
-				color: #333;
-				background-color: #f8f9fa;
-			}
-			.project-card {
-				transition: transform 0.3s ease;
-			}
-			.project-card:hover {
-				transform: translateY(-5px);
-			}
-			/* .slider {
-				--slide-duration: 5s;
-			} */
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Портфолио Архитектора - Евдокимова Зоя</title>
+    <link rel="stylesheet" href="output.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css"
+    />
+    <style>
+      body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        color: #333;
+        background-color: #f8f9fa;
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+      }
+      .project-card {
+        transition: transform 0.3s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-5px);
+      }
 
-			.slide {
-				opacity: 0;
-				animation: fade var(--slide-duration) infinite;
-			}
+      /* Стили для Glider */
+      .glider-contain {
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+      }
 
-			.slide:nth-child(1) {
-				animation-delay: calc(var(--slide-duration) * -2);
-			}
-			.slide:nth-child(2) {
-				animation-delay: calc(var(--slide-duration) * -1);
-			}
-			.slide:nth-child(3) {
-				animation-delay: 0s;
-			}
+      .glider-slide {
+        position: relative;
+      }
 
-			@keyframes fade {
-				0%,
-				33.33% {
-					opacity: 1;
-				}
-				33.34%,
-				100% {
-					opacity: 0;
-				}
-			}
+      .glider-slide img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+      }
 
-			.slider-controls:checked ~ .slider-inner .slide {
-				animation: none;
-			}
+      .glider-slide-caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 8px;
+        font-size: 1.25rem;
+      }
 
-			.slider-control:checked:nth-child(1) ~ .slider-inner .slide:nth-child(1),
-			.slider-control:checked:nth-child(2) ~ .slider-inner .slide:nth-child(2),
-			.slider-control:checked:nth-child(3) ~ .slider-inner .slide:nth-child(3),
-			.slider-control:checked:nth-child(4) ~ .slider-inner .slide:nth-child(4),
-            .slider-control:checked:nth-child(5) ~ .slider-inner .slide:nth-child(5),
-            .slider-control:checked:nth-child(6) ~ .slider-inner .slide:nth-child(6) {
-				opacity: 1;
-			}
-		</style>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	</head>
-	<body>
-		<!-- Header Section -->
-		<header class="bg-white shadow-md">
-			<div class="container mx-auto px-4 py-6 flex justify-between items-center">
-				<div>
-					<h1 class="text-3xl font-bold">Евдокимова Зоя</h1>
-					<p class="text-gray-600">Архитектор | Дизайнер интерьера | Графический дизайнер</p>
-				</div>
-				<nav>
-					<ul class="flex space-x-6">
-						<li><a href="#about" class="hover:text-blue-500">Обо мне</a></li>
-						<li><a href="#projects" class="hover:text-blue-500">Проекты</a></li>
-						<li><a href="#skills" class="hover:text-blue-500">Навыки</a></li>
-						<li><a href="#contact" class="hover:text-blue-500">Контакты</a></li>
-					</ul>
-				</nav>
-			</div>
-		</header>
+      .glider-prev,
+      .glider-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        padding: 10px;
+        z-index: 2;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
 
-		<!-- Hero Section -->
-		<section class="bg-gradient-to-r from-amber-100 to-amber-200 text-black py-20">
-			<div class="container mx-auto px-4 text-center">
-				<h2 class="text-4xl font-bold mb-4">Портфолио Архитектора</h2>
-				<p class="text-xl max-w-2xl mx-auto">
-					Создаю функциональные и эстетичные архитектурные проекты, интерьеры и графический дизайн
-				</p>
-				<button
-					class="mt-8 bg-white text-blue-600 px-6 py-3 rounded-full font-bold hover:bg-blue-50 transition">
-					<a href="#projects">Смотреть работы</a>
-				</button>
-			</div>
-		</section>
+      .glider-prev {
+        left: 10px;
+      }
 
-		<!-- About Me Section -->
-		<section id="about" class="py-16 bg-white">
-			<div class="container mx-auto px-4">
-				<h2 class="text-3xl font-bold text-center mb-12">Обо мне</h2>
-				<div class="flex flex-col md:flex-row items-center gap-12">
-					<div class="w-full md:w-1/3">
-						<img
-							src="img/logo.jpg"
-							alt="Евдокимова Зоя"
-							class="rounded-lg shadow-lg mx-auto" />
-					</div>
-					<div class="w-full md:w-2/3">
-						<p class="text-lg mb-6">
-							Меня зовут Евдокимова Зоя, учусь на архитектора, обучаюсь проектированию зданий,
-							дизайну интерьера и графическому дизайну. Во время обучения в колледже выполнила
-							проекты жилого дома и общественного здания с полной комплектацией чертежей и
-							документацией.
-						</p>
+      .glider-next {
+        right: 10px;
+      }
 
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-							<div>
-								<h3 class="text-xl font-bold mb-4">Личные качества</h3>
-								<ul class="list-disc pl-5 space-y-2">
-									<li>Пунктуальность</li>
-									<li>Быстрая обучаемость</li>
-									<li>Умение работать в команде</li>
-									<li>Ответственность</li>
-									<li>Нацеленность на результат</li>
-									<li>Целеустремленность</li>
-								</ul>
-							</div>
-							<div>
-								<h3 class="text-xl font-bold mb-4">Soft skills</h3>
-								<ul class="list-disc pl-5 space-y-2">
-									<li>Эмпатия</li>
-									<li>Самоорганизация</li>
-									<li>Мотивирование</li>
-									<li>Умение слышать и слушать</li>
-								</ul>
-							</div>
-						</div>
+      .glider-dots {
+        margin-top: 10px;
+      }
 
-						<div class="mt-8">
-							<h3 class="text-xl font-bold mb-4">Образование</h3>
-							<p>ГБПОУ Южно-Уральский государственный технический колледж</p>
-						</div>
-                        <div class="mt-8">
-                            <a href="img/rez.pdf" class="underline">Резюме</a>
+      .glider-dot {
+        background: rgba(0, 0, 0, 0.3);
+        border: 0;
+        width: 10px;
+        height: 10px;
+        padding: 0;
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+
+      .glider-dot:hover,
+      .glider-dot.active {
+        background: rgba(0, 0, 0, 0.8);
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Добавляем Glider.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="bg-white shadow-md">
+      <div
+        class="container mx-auto px-4 py-6 flex justify-between items-center"
+      >
+        <div>
+          <h1 class="text-3xl font-bold">Евдокимова Зоя</h1>
+          <p class="text-gray-600">
+            Архитектор | Дизайнер интерьера | Графический дизайнер
+          </p>
+        </div>
+        <nav>
+          <ul class="flex space-x-6">
+            <li><a href="#about" class="hover:text-blue-500">Обо мне</a></li>
+            <li>
+              <a href="#experience" class="hover:text-blue-500">Опыт работы</a>
+            </li>
+            <li><a href="#projects" class="hover:text-blue-500">Проекты</a></li>
+            <li><a href="#skills" class="hover:text-blue-500">Навыки</a></li>
+            <li><a href="#contact" class="hover:text-blue-500">Контакты</a></li>
+            <li>
+              <a href="#career" class="hover:text-blue-500">Карьерный план</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="bg-gradient-to-r from-amber-100 to-amber-200 text-black py-20"
+    >
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-4">Портфолио Архитектора</h2>
+        <p class="text-xl max-w-2xl mx-auto">
+          Создаю функциональные и эстетичные архитектурные проекты, интерьеры и
+          графический дизайн
+        </p>
+        <button
+          class="mt-8 bg-white text-blue-600 px-6 py-3 rounded-full font-bold hover:bg-blue-50 transition"
+        >
+          <a href="#projects">Смотреть работы</a>
+        </button>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Обо мне</h2>
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="w-full md:w-1/3">
+            <img
+              src="img/logo.jpg"
+              alt="Евдокимова Зоя"
+              class="rounded-lg shadow-lg mx-auto"
+            />
+          </div>
+          <div class="w-full md:w-2/3">
+            <p class="text-lg mb-6">
+              Меня зовут Евдокимова Зоя, учусь на архитектора, обучаюсь
+              проектированию зданий, дизайну интерьера и графическому дизайну.
+              Во время обучения в колледже выполнила проекты жилого дома и
+              общественного здания с полной комплектацией чертежей и
+              документацией.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+              <div>
+                <h3 class="text-xl font-bold mb-4">Личные качества</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                  <li>Пунктуальность</li>
+                  <li>Быстрая обучаемость</li>
+                  <li>Умение работать в команде</li>
+                  <li>Ответственность</li>
+                  <li>Нацеленность на результат</li>
+                  <li>Целеустремленность</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-4">Soft skills</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                  <li>Эмпатия</li>
+                  <li>Самоорганизация</li>
+                  <li>Мотивирование</li>
+                  <li>Умение слышать и слушать</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h3 class="text-xl font-bold mb-4">Образование</h3>
+              <p>ГБПОУ Южно-Уральский государственный технический колледж</p>
+            </div>
+            <div class="mt-8">
+              <a href="img/rez.pdf" class="underline">Резюме</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Добавляем секцию Опыт работы -->
+    <section id="experience" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Опыт работы</h2>
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+          <h3 class="text-2xl font-bold mb-2">
+            Управление строительства и архитектуры администрации Саткинского
+            муниципального округа Челябинской области
+          </h3>
+          <p class="text-gray-600 mb-4">г. Сатка</p>
+          <p class="text-lg mb-4">
+            <strong>Период работы:</strong> 18.08.2024г. – 29.09.2024г.
+          </p>
+          <p class="text-lg mb-6">
+            <strong>Должность:</strong> Помощник архитектора
+          </p>
+
+          <div class="mb-6">
+            <h4 class="text-xl font-semibold mb-3">Описание работы:</h4>
+            <p class="mb-4">
+              Моя задача заключалась в векторизации ручных чертежей многоэтажных
+              домов в программы ArchiCAD и AutoCAD.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xl font-semibold mb-3">
+              Функциональные обязанности:
+            </h4>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>Разработка чертежей зданий производственного характера</li>
+              <li>
+                Векторизация финальных чертежей в программы автоматизированного
+                проектирования
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="mt-8 p-4 bg-gray-50 rounded-lg border-l-4 border-blue-500"
+          >
+            <p class="italic text-gray-700">
+              Этот опыт работы позволил мне применить полученные теоретические
+              знания на практике и развить навыки работы с профессиональным
+              программным обеспечением в реальных рабочих условиях.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="py-16 bg-gray-100">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          Профессиональные навыки
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- AutoCAD -->
+          <div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
+            <div class="text-blue-500 text-5xl font-bold mb-2">10/10</div>
+            <h3 class="text-xl font-bold mb-3">AutoCAD</h3>
+            <div class="w-full bg-gray-200 h-2 rounded-full mt-2">
+              <div
+                class="bg-blue-600 h-2 rounded-full"
+                style="width: 100%"
+              ></div>
+            </div>
+            <p class="mt-4 text-gray-600">
+              Профессиональное создание 2D и 3D чертежей
+            </p>
+          </div>
+
+          <!-- ArchiCAD -->
+          <div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
+            <div class="text-blue-500 text-5xl font-bold mb-2">10/10</div>
+            <h3 class="text-xl font-bold mb-3">ArchiCAD</h3>
+            <div class="w-full bg-gray-200 h-2 rounded-full mt-2">
+              <div
+                class="bg-blue-600 h-2 rounded-full"
+                style="width: 100%"
+              ></div>
+            </div>
+            <p class="mt-4 text-gray-600">
+              Информационное моделирование зданий (BIM)
+            </p>
+          </div>
+
+          <!-- Twinmotion -->
+          <div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
+            <div class="text-blue-500 text-5xl font-bold mb-2">6/10</div>
+            <h3 class="text-xl font-bold mb-3">Twinmotion</h3>
+            <div class="w-full bg-gray-200 h-2 rounded-full mt-2">
+              <div
+                class="bg-blue-600 h-2 rounded-full"
+                style="width: 60%"
+              ></div>
+            </div>
+            <p class="mt-4 text-gray-600">
+              Создание визуализаций и анимаций проектов
+            </p>
+          </div>
+
+          <!-- CorelDRAW -->
+          <div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
+            <div class="text-blue-500 text-5xl font-bold mb-2">9/10</div>
+            <h3 class="text-xl font-bold mb-3">CorelDRAW</h3>
+            <div class="w-full bg-gray-200 h-2 rounded-full mt-2">
+              <div
+                class="bg-blue-600 h-2 rounded-full"
+                style="width: 90%"
+              ></div>
+            </div>
+            <p class="mt-4 text-gray-600">
+              Графический дизайн и векторная графика
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-[url('img/1.jpg')]">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Мои проекты</h2>
+
+        <!-- Project 1 -->
+        <div class="mb-24">
+          <div class="bg-gray-50 rounded-lg overflow-hidden shadow-xl">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-4">Проект жилого дома</h3>
+              <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                <div class="w-full lg:w-1/2">
+                  <!-- Замена на Glider.js -->
+                  <div class="glider-contain">
+                    <div class="glider glider-1">
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide1_1.jpg"
+                          alt="План 1 этажа"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">План 1 этажа</div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide1_2.jpg"
+                          alt="План 2 этажа"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">План 2 этажа</div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide1_3.jpg"
+                          alt="Макет"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">Макет</div>
+                      </div>
+                    </div>
+
+                    <button aria-label="Previous" class="glider-prev"><</button>
+                    <button aria-label="Next" class="glider-next">></button>
+                    <div role="tablist" class="glider-dots"></div>
+                  </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                  <p class="text-gray-600 mb-6">
+                    Полный комплект чертежей и документации для строительства
+                    частного жилого дома. Проект включает в себя архитектурные
+                    решения, конструктивные чертежи, инженерные системы и дизайн
+                    интерьера.
+                  </p>
+                  <div class="mb-6">
+                    <h4 class="font-bold mb-2">Особенности проекта:</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li>Энергоэффективное строительство</li>
+                      <li>Эргономичные планировочные решения</li>
+                      <li>Современный дизайн фасадов</li>
+                      <li>Детальная проработка всех узлов</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-xl font-bold mb-3">
+                    Технические характеристики
+                  </h4>
+                  <ul class="space-y-2">
+                    <li><span class="font-semibold">Площадь:</span> 180 м²</li>
+                    <li>
+                      <span class="font-semibold">Этажность:</span> 2 этажа
+                    </li>
+                    <li>
+                      <span class="font-semibold">Материалы:</span> Кирпич,
+                      дерево, стекло
+                    </li>
+                    <li>
+                      <span class="font-semibold">Год проектирования:</span>
+                      2023
+                    </li>
+                    <li>
+                      <span class="font-semibold">Статус:</span> Реализован
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold mb-3">Процесс проектирования</h4>
+                  <p class="text-gray-600">
+                    Начиная с концептуальных эскизов, через стадию проектной
+                    документации, до рабочей документации и авторского надзора.
+                    Учтены все мои пожелания по функциональности, эргономике и
+                    эстетике.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="mb-24">
+          <div class="bg-gray-50 rounded-lg overflow-hidden shadow-xl">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-4">
+                Проект общественного здания
+              </h3>
+              <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                <div class="w-full lg:w-1/2">
+                  <!-- Замена на Glider.js -->
+                  <div class="glider-contain">
+                    <div class="glider glider-2">
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide2_1.png"
+                          alt="План 1 этажа"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">План 1 этажа</div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide2_2.png"
+                          alt="План 2 этажа"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">План 2 этажа</div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide2_3.png"
+                          alt="3д визуализация зала"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">
+                          3д визуализация зала
                         </div>
-					</div>
-				</div>
-			</div>
-		</section>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide2_4.png"
+                          alt="3д визуализация хола"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">
+                          3д визуализация хола
+                        </div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide2_5.png"
+                          alt="3д визуализация здания"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">
+                          3д визуализация здания
+                        </div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide2_6.jpg"
+                          alt="Макет"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">Макет</div>
+                      </div>
+                    </div>
 
-		<section id="skills" class="py-16 bg-gray-100">
-			<div class="container mx-auto px-4">
-				<h2 class="text-3xl font-bold text-center mb-12">Профессиональные навыки</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-					<!-- AutoCAD -->
-					<div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
-						<div class="text-blue-500 text-5xl font-bold mb-2">10/10</div>
-						<h3 class="text-xl font-bold mb-3">AutoCAD</h3>
-						<div class="w-full bg-gray-200 h-2 rounded-full mt-2">
-							<div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
-						</div>
-						<p class="mt-4 text-gray-600">Профессиональное создание 2D и 3D чертежей</p>
-					</div>
+                    <button aria-label="Previous" class="glider-prev"><</button>
+                    <button aria-label="Next" class="glider-next">></button>
+                    <div role="tablist" class="glider-dots"></div>
+                  </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                  <p class="text-gray-600 mb-6">
+                    Комплексный проект общественного здания с полной
+                    документацией и визуализацией. Проект разработан с учетом
+                    всех требований к общественным пространствам, включая
+                    доступность для маломобильных групп населения.
+                  </p>
+                  <div class="mb-6">
+                    <h4 class="font-bold mb-2">Особенности проекта:</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li>Универсальный дизайн для всех групп населения</li>
+                      <li>Инновационные решения энергосбережения</li>
+                      <li>Интеграция с городской средой</li>
+                      <li>Многофункциональные пространства</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-xl font-bold mb-3">
+                    Технические характеристики
+                  </h4>
+                  <ul class="space-y-2">
+                    <li><span class="font-semibold">Площадь:</span> 1200 м²</li>
+                    <li>
+                      <span class="font-semibold">Этажность:</span> 2 этажа
+                    </li>
+                    <li>
+                      <span class="font-semibold">Назначение:</span>
+                      Драматический театр
+                    </li>
+                    <li>
+                      <span class="font-semibold">Год проектирования:</span>
+                      2025
+                    </li>
+                    <li>
+                      <span class="font-semibold">Статус:</span> Реализовано
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold mb-3">Достижения проекта</h4>
+                  <p class="text-gray-600">
+                    Начиная с концептуальных эскизов, через стадию проектной
+                    документации, до рабочей документации и авторского надзора.
+                    Учтены все мои пожелания по функциональности, эргономике и
+                    эстетике.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-					<!-- ArchiCAD -->
-					<div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
-						<div class="text-blue-500 text-5xl font-bold mb-2">10/10</div>
-						<h3 class="text-xl font-bold mb-3">ArchiCAD</h3>
-						<div class="w-full bg-gray-200 h-2 rounded-full mt-2">
-							<div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
-						</div>
-						<p class="mt-4 text-gray-600">Информационное моделирование зданий (BIM)</p>
-					</div>
+        <!-- Project 3 -->
+        <div>
+          <div class="bg-gray-50 rounded-lg overflow-hidden shadow-xl">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-4">Дизайн интерьера</h3>
+              <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                <div class="w-full lg:w-1/2">
+                  <!-- Замена на Glider.js -->
+                  <div class="glider-contain">
+                    <div class="glider glider-3">
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide3_1.jpg"
+                          alt="План 1 этажа"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">План 1 этажа</div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide3_2.jpg"
+                          alt="План 2 этажа"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">План 2 этажа</div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide3_3.jpg"
+                          alt="Мудборд гостинной"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">
+                          Мудборд гостинной
+                        </div>
+                      </div>
+                      <div class="glider-slide">
+                        <img
+                          src="img/slide3_4.jpg"
+                          alt="Мудборд кухни"
+                          class="w-full h-full object-cover"
+                        />
+                        <div class="glider-slide-caption">Мудборд кухни</div>
+                      </div>
+                    </div>
 
-					<!-- Twinmotion -->
-					<div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
-						<div class="text-blue-500 text-5xl font-bold mb-2">6/10</div>
-						<h3 class="text-xl font-bold mb-3">Twinmotion</h3>
-						<div class="w-full bg-gray-200 h-2 rounded-full mt-2">
-							<div class="bg-blue-600 h-2 rounded-full" style="width: 60%"></div>
-						</div>
-						<p class="mt-4 text-gray-600">Создание визуализаций и анимаций проектов</p>
-					</div>
+                    <button aria-label="Previous" class="glider-prev"><</button>
+                    <button aria-label="Next" class="glider-next">></button>
+                    <div role="tablist" class="glider-dots"></div>
+                  </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                  <p class="text-gray-600 mb-6">
+                    Проект интерьера жилого пространства с полной визуализацией
+                    и спецификацией материалов. Концепция основана на сочетании
+                    функциональности и эстетики, с учетом индивидуальных
+                    потребностей клиента.
+                  </p>
+                  <div class="mb-6">
+                    <h4 class="font-bold mb-2">Особенности проекта:</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li>Эргономичное использование пространства</li>
+                      <li>Индивидуальный подбор материалов и мебели</li>
+                      <li>Интеграция современных технологий</li>
+                      <li>Детальная проработка освещения</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-xl font-bold mb-3">Детали проекта</h4>
+                  <ul class="space-y-2">
+                    <li><span class="font-semibold">Площадь:</span> 85 м²</li>
+                    <li><span class="font-semibold">Тип:</span> Дом</li>
+                    <li><span class="font-semibold">Стиль:</span> Бохо</li>
+                    <li>
+                      <span class="font-semibold">Год проектирования:</span>
+                      2024
+                    </li>
+                    <li>
+                      <span class="font-semibold">Статус:</span> Реализован
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold mb-3">Подход к дизайну</h4>
+                  <p class="text-gray-600">
+                    Дизайн интерьера создан с учётом образа жизни заказчика, его
+                    привычек и предпочтений. Особое внимание уделено зонированию
+                    пространства и созданию комфортной атмосферы. Цветовая
+                    палитра и материалы подобраны для создания целостной и
+                    гармоничной композиции.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container mx-auto px-4 py-12 max-w-6xl">
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">
+          Карьерный путь архитектора
+        </h1>
+        <p class="text-center text-gray-600 mb-8">
+          Прогрессивный рост профессионала в архитектуре
+        </p>
 
-					<!-- CorelDRAW -->
-					<div class="skill-item bg-white p-6 rounded-lg shadow-lg text-center">
-						<div class="text-blue-500 text-5xl font-bold mb-2">9/10</div>
-						<h3 class="text-xl font-bold mb-3">CorelDRAW</h3>
-						<div class="w-full bg-gray-200 h-2 rounded-full mt-2">
-							<div class="bg-blue-600 h-2 rounded-full" style="width: 90%"></div>
-						</div>
-						<p class="mt-4 text-gray-600">Графический дизайн и векторная графика</p>
-					</div>
-				</div>
-			</div>
-		</section>
+        <!-- График Chart.js -->
+        <div class="h-96 mb-8">
+          <canvas id="careerChart"></canvas>
+        </div>
 
-		<!-- Projects Section -->
-		<section id="projects" class="py-16 bg-[url('/img/1.jpg')]">
-			<div class="container mx-auto px-4">
-				<h2 class="text-3xl font-bold text-center mb-12">Мои проекты</h2>
+        <!-- Карточки с описанием -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-green-200 p-4 rounded-lg border-l-4 border-green-300">
+            <h3 class="font-bold text-lg mb-1">Помощник архитектора</h3>
+            <div class="text-sm text-green-800 mb-2">2025</div>
+            <p class="text-gray-700 text-sm">
+              Работа под руководством опытных специалистов, освоение базовых
+              навыков проектирования.
+            </p>
+          </div>
 
-				<!-- Project 1 -->
-				<div class="mb-24">
-					<div class="bg-gray-50 rounded-lg overflow-hidden shadow-xl">
-						<div class="p-8">
-							<h3 class="text-2xl font-bold mb-4">Проект жилого дома</h3>
-							<div class="flex flex-col lg:flex-row gap-8 mb-8">
-								<div class="w-full lg:w-1/2">
-									<div class="slider relative h-[500px] w-full overflow-hidden">
-										<!-- Управление -->
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide1_1"
-											checked />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide1_2" />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide1_3" />
+          <div class="bg-green-500 p-4 rounded-lg border-l-4 border-green-600">
+            <h3 class="font-bold text-lg mb-1">Архитектор 3 категории</h3>
+            <div class="text-sm text-green-800 mb-2">2030</div>
+            <p class="text-gray-700 text-sm">
+              Самостоятельная работа над проектами среднего масштаба, развитие
+              собственного стиля.
+            </p>
+          </div>
 
-										<!-- Контейнер слайдов -->
-										<div class="slider-inner relative h-full w-full">
-											<!-- Слайды с картинками -->
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide1_1.jpg"
-													alt="Nature 1"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													План 1 этажа
-												</div>
-											</div>
+          <div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
+            <h3 class="font-bold text-lg mb-1">Архитектор 2 категории</h3>
+            <div class="text-sm text-blue-800 mb-2">2035</div>
+            <p class="text-gray-700 text-sm">
+              Руководство проектными группами, работа над сложными и масштабными
+              объектами.
+            </p>
+          </div>
 
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide1_2.jpg"
-													alt="Nature 2"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													План 2 этажа
-												</div>
-											</div>
+          <div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
+            <h3 class="font-bold text-lg mb-1">Архитектор 1 категории</h3>
+            <div class="text-sm text-blue-800 mb-2">2040</div>
+            <p class="text-gray-700 text-sm">
+              Определение архитектурной политики компании, руководство всеми
+              архитектурными решениями.
+            </p>
+          </div>
 
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide1_3.jpg"
-													alt="Nature 3"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													Макет
-												</div>
-											</div>
-										</div>
+          <div
+            class="bg-purple-500 p-4 rounded-lg border-l-4 border-purple-600"
+          >
+            <h3 class="font-bold text-lg mb-1">Архитектурный директор</h3>
+            <div class="text-sm text-purple-800 mb-2">2045</div>
+            <p class="text-gray-700 text-sm">
+              Стратегическое планирование, участие в формировании архитектурных
+              трендов.
+            </p>
+          </div>
 
-										<!-- Навигационные точки -->
-										<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-											<label
-												for="slide1_1"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide1_2"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide1_3"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-										</div>
-									</div>
-								</div>
-								<div class="w-full lg:w-1/2">
-									<p class="text-gray-600 mb-6">
-										Полный комплект чертежей и документации для строительства частного жилого дома.
-										Проект включает в себя архитектурные решения, конструктивные чертежи, инженерные
-										системы и дизайн интерьера.
-									</p>
-									<div class="mb-6">
-										<h4 class="font-bold mb-2">Особенности проекта:</h4>
-										<ul class="list-disc pl-5 space-y-1">
-											<li>Энергоэффективное строительство</li>
-											<li>Эргономичные планировочные решения</li>
-											<li>Современный дизайн фасадов</li>
-											<li>Детальная проработка всех узлов</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-								<div>
-									<h4 class="text-xl font-bold mb-3">Технические характеристики</h4>
-									<ul class="space-y-2">
-										<li><span class="font-semibold">Площадь:</span> 180 м²</li>
-										<li><span class="font-semibold">Этажность:</span> 2 этажа</li>
-										<li><span class="font-semibold">Материалы:</span> Кирпич, дерево, стекло</li>
-										<li><span class="font-semibold">Год проектирования:</span> 2023</li>
-										<li><span class="font-semibold">Статус:</span> Реализован</li>
-									</ul>
-								</div>
-								<div>
-									<h4 class="text-xl font-bold mb-3">Процесс проектирования</h4>
-									<p class="text-gray-600">
-										Начиная с концептуальных эскизов, через стадию проектной документации, до
-										рабочей документации и авторского надзора. Учтены все мои пожелания по
-										функциональности, эргономике и эстетике.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+          <div
+            class="bg-yellow-500 p-4 rounded-lg border-l-4 border-yellow-600"
+          >
+            <h3 class="font-bold text-lg mb-1">Пенсия</h3>
+            <div class="text-sm text-yellow-800 mb-2">2066</div>
+            <p class="text-gray-700 text-sm">
+              Консультационная деятельность, участие в экспертных советах,
+              преподавание.
+            </p>
+          </div>
+        </div>
 
-				<!-- Project 2 -->
-				<div class="mb-24">
-					<div class="bg-gray-50 rounded-lg overflow-hidden shadow-xl">
-						<div class="p-8">
-							<h3 class="text-2xl font-bold mb-4">Проект общественного здания</h3>
-							<div class="flex flex-col lg:flex-row gap-8 mb-8">
-								<div class="w-full lg:w-1/2">
-									<div class="slider relative h-[500px] w-full overflow-hidden">
-										<!-- Управление -->
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide2_1"
-											checked />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide2_2" />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide2_3" />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide2_4" />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide2_5" />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide2_6" />
+        <div class="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <p class="text-center text-gray-700 italic">
+            Инвестируйте в свое профессиональное развитие сегодня — стройте
+            карьеру так же тщательно, как проектируете здания!
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-blue-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Свяжитесь со мной</h2>
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row">
+          <div class="w-full md:w-1/2 mb-8 md:mb-0">
+            <h3 class="text-xl font-bold mb-4">Контактная информация</h3>
+            <p class="mb-2">
+              <span class="font-semibold">Телефон:</span> +79617900137
+            </p>
+            <p class="mb-2">
+              <span class="font-semibold">Почта:</span> zevdokimova779@gmail.com
+            </p>
+            <div class="mt-8">
+              <h3 class="text-xl font-bold mb-4">Социальные сети</h3>
+              <div class="flex space-x-4">
+                <a
+                  href="https://t.me/Hilfmir637"
+                  class="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white"
+                  >VK</a
+                >
+                <a
+                  href="https://vk.com/tosha637"
+                  class="h-10 w-10 rounded-full bg-blue-800 flex items-center justify-center text-white"
+                  >TG</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-										<!-- Контейнер слайдов -->
-										<div class="slider-inner relative h-full w-full">
-											<!-- Слайды с картинками -->
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide2_1.png"
-													alt="Nature 1"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													План 1 этажа
-												</div>
-											</div>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4 text-center">
+        <p>© 2025 Евдокимова Зоя. Все права защищены.</p>
+        <p class="mt-2 text-gray-400">Портфолио Архитектора</p>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize the first glider (Project 1)
+        new Glider(document.querySelector(".glider-1"), {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+		  scrollLock: true,
+          draggable: true,
+          dots: ".glider-1 + .glider-dots",
+          arrows: {
+            prev: ".glider-1 ~ .glider-prev",
+            next: ".glider-1 ~ .glider-next",
+          },
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
 
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide2_2.png"
-													alt="Nature 2"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													План 2 этажа
-												</div>
-											</div>
+        // Initialize the second glider (Project 2)
+        new Glider(document.querySelector(".glider-2"), {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+		  scrollLock: true,
+          draggable: true,
+          dots: ".glider-2 + .glider-dots",
+          arrows: {
+            prev: ".glider-2 ~ .glider-prev",
+            next: ".glider-2 ~ .glider-next",
+          },
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
 
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide2_3.png"
-													alt="Nature 3"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													3д визуализация зала
-												</div>
-											</div>
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide2_4.png"
-													alt="Nature 4"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													3д визуализация хола
-												</div>
-											</div>
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide2_5.png"
-													alt="Nature 4"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													3д визуализация здания
-												</div>
-											</div>
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide2_6.jpg"
-													alt="Nature 4"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													Макет
-												</div>
-											</div>
-										</div>
+        // Initialize the third glider (Project 3)
+        new Glider(document.querySelector(".glider-3"), {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          scrollLock: true,
+          draggable: true,
+          dots: ".glider-3 + .glider-dots",
+          arrows: {
+            prev: ".glider-3 ~ .glider-prev",
+            next: ".glider-3 ~ .glider-next",
+          },
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
+        });
+      });
+      // Данные для графика
+      const years = [2025, 2030, 2035, 2040, 2045, 2066];
+      const positions = [
+        "Помощник архитектора",
+        "Архитектор 3 категории",
+        "Архитектор 2 категории",
+        "Архитектор 1 категории",
+        "Архитектурный директор",
+        "Пенсия",
+      ];
+      const levels = [1, 2, 3, 4, 5, 6]; // Уровни для визуализации роста
 
-										<!-- Навигационные точки -->
-										<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-											<label
-												for="slide2_1"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide2_2"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide2_3"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide2_4"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide2_5"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide2_6"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-										</div>
-									</div>
-								</div>
-								<div class="w-full lg:w-1/2">
-									<p class="text-gray-600 mb-6">
-										Комплексный проект общественного здания с полной документацией и визуализацией.
-										Проект разработан с учетом всех требований к общественным пространствам, включая
-										доступность для маломобильных групп населения.
-									</p>
-									<div class="mb-6">
-										<h4 class="font-bold mb-2">Особенности проекта:</h4>
-										<ul class="list-disc pl-5 space-y-1">
-											<li>Универсальный дизайн для всех групп населения</li>
-											<li>Инновационные решения энергосбережения</li>
-											<li>Интеграция с городской средой</li>
-											<li>Многофункциональные пространства</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-								<div>
-									<h4 class="text-xl font-bold mb-3">Технические характеристики</h4>
-									<ul class="space-y-2">
-										<li><span class="font-semibold">Площадь:</span> 1200 м²</li>
-										<li><span class="font-semibold">Этажность:</span> 2 этажа</li>
-										<li><span class="font-semibold">Назначение:</span> Драматический театр</li>
-										<li><span class="font-semibold">Год проектирования:</span> 2025</li>
-										<li><span class="font-semibold">Статус:</span> Реализовано</li>
-									</ul>
-								</div>
-								<div>
-									<h4 class="text-xl font-bold mb-3">Достижения проекта</h4>
-									<p class="text-gray-600">
-										Начиная с концептуальных эскизов, через стадию проектной документации, до
-										рабочей документации и авторского надзора. Учтены все мои пожелания по
-										функциональности, эргономике и эстетике.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Project 3 -->
-				<div>
-					<div class="bg-gray-50 rounded-lg overflow-hidden shadow-xl">
-						<div class="p-8">
-							<h3 class="text-2xl font-bold mb-4">Дизайн интерьера</h3>
-							<div class="flex flex-col lg:flex-row gap-8 mb-8">
-								<div class="w-full lg:w-1/2">
-									<div class="slider relative h-[500px] w-full overflow-hidden">
-										<!-- Управление -->
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide1"
-											checked />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide2" />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide3" />
-										<input
-											class="slider-control absolute opacity-0"
-											type="radio"
-											name="slider"
-											id="slide4" />
-
-										<!-- Контейнер слайдов -->
-										<div class="slider-inner relative h-full w-full">
-											<!-- Слайды с картинками -->
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide3_1.jpg"
-													alt="Nature 1"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													План 1 этажа
-												</div>
-											</div>
-
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide3_2.jpg"
-													alt="Nature 2"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													План 2 этажа
-												</div>
-											</div>
-
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide3_3.jpg"
-													alt="Nature 3"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													Мудборд гостинной
-												</div>
-											</div>
-											<div class="slide absolute inset-0">
-												<img
-													src="img/slide3_4.jpg"
-													alt="Nature 4"
-													class="w-full h-full object-cover" />
-												<div class="absolute bottom-4 left-4 text-white text-xl bg-black/50 p-2">
-													Мудборд кухни
-												</div>
-											</div>
-										</div>
-
-										<!-- Навигационные точки -->
-										<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-											<label
-												for="slide1"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide2"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide3"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-											<label
-												for="slide4"
-												class="slider-dot w-3 h-3 rounded-full bg-black/50 cursor-pointer transition-all duration-300 hover:bg-black"></label>
-										</div>
-									</div>
-								</div>
-								<div class="w-full lg:w-1/2">
-									<p class="text-gray-600 mb-6">
-										Проект интерьера жилого пространства с полной визуализацией и спецификацией
-										материалов. Концепция основана на сочетании функциональности и эстетики, с
-										учетом индивидуальных потребностей клиента.
-									</p>
-									<div class="mb-6">
-										<h4 class="font-bold mb-2">Особенности проекта:</h4>
-										<ul class="list-disc pl-5 space-y-1">
-											<li>Эргономичное использование пространства</li>
-											<li>Индивидуальный подбор материалов и мебели</li>
-											<li>Интеграция современных технологий</li>
-											<li>Детальная проработка освещения</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-								<div>
-									<h4 class="text-xl font-bold mb-3">Детали проекта</h4>
-									<ul class="space-y-2">
-										<li><span class="font-semibold">Площадь:</span> 85 м²</li>
-										<li><span class="font-semibold">Тип:</span> Дом</li>
-										<li><span class="font-semibold">Стиль:</span> Бохо</li>
-										<li><span class="font-semibold">Год проектирования:</span> 2024</li>
-										<li><span class="font-semibold">Статус:</span> Реализован</li>
-									</ul>
-								</div>
-								<div>
-									<h4 class="text-xl font-bold mb-3">Подход к дизайну</h4>
-									<p class="text-gray-600">
-										Дизайн интерьера создан с учётом образа жизни заказчика, его привычек и
-										предпочтений. Особое внимание уделено зонированию пространства и созданию
-										комфортной атмосферы. Цветовая палитра и материалы подобраны для создания
-										целостной и гармоничной композиции.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section id="career" class="py-16 bg-white">
-			<div class="container mx-auto px-4 py-12 max-w-6xl">
-				<div class="bg-white rounded-lg shadow-md p-6 mb-8">
-					<h1 class="text-3xl font-bold text-center mb-2 text-gray-800">Карьерный путь архитектора</h1>
-					<p class="text-center text-gray-600 mb-8">Прогрессивный рост профессионала в архитектуре</p>
-					
-					<!-- График Chart.js -->
-				<div class="h-96 mb-8">
-					<canvas id="careerChart"></canvas>
-				</div>
-				
-				<!-- Карточки с описанием -->
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					<div class="bg-green-200 p-4 rounded-lg border-l-4 border-green-300">
-						<h3 class="font-bold text-lg mb-1">Помощник архитектора</h3>
-						<div class="text-sm text-green-800 mb-2">2025</div>
-						<p class="text-gray-700 text-sm">Работа под руководством опытных специалистов, освоение базовых навыков проектирования.</p>
-					</div>
-					
-					<div class="bg-green-500 p-4 rounded-lg border-l-4 border-green-600">
-						<h3 class="font-bold text-lg mb-1">Архитектор 3 категории</h3>
-						<div class="text-sm text-green-800 mb-2">2030</div>
-						<p class="text-gray-700 text-sm">Самостоятельная работа над проектами среднего масштаба, развитие собственного стиля.</p>
-					</div>
-					
-					<div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
-						<h3 class="font-bold text-lg mb-1">Архитектор 2 категории</h3>
-						<div class="text-sm text-blue-800 mb-2">2035</div>
-						<p class="text-gray-700 text-sm">Руководство проектными группами, работа над сложными и масштабными объектами.</p>
-					</div>
-					
-					<div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
-						<h3 class="font-bold text-lg mb-1">Архитектор 1 категории</h3>
-						<div class="text-sm text-blue-800 mb-2">2040</div>
-						<p class="text-gray-700 text-sm">Определение архитектурной политики компании, руководство всеми архитектурными решениями.</p>
-					</div>
-					
-					<div class="bg-purple-500 p-4 rounded-lg border-l-4 border-purple-600">
-						<h3 class="font-bold text-lg mb-1">Архитектурный директор</h3>
-						<div class="text-sm text-purple-800 mb-2">2045</div>
-						<p class="text-gray-700 text-sm">Стратегическое планирование, участие в формировании архитектурных трендов.</p>
-					</div>
-					
-					<div class="bg-yellow-500 p-4 rounded-lg border-l-4 border-yellow-600">
-						<h3 class="font-bold text-lg mb-1">Пенсия</h3>
-						<div class="text-sm text-yellow-800 mb-2">2066</div>
-						<p class="text-gray-700 text-sm">Консультационная деятельность, участие в экспертных советах, преподавание.</p>
-					</div>
-				</div>
-				
-				<div class="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-					<p class="text-center text-gray-700 italic">Инвестируйте в свое профессиональное развитие сегодня — стройте карьеру так же тщательно, как проектируете здания!</p>
-				</div>
-			</div>
-		</div>
-		<!-- Contact Section -->
-		<section id="contact" class="py-16 bg-blue-50">
-			<div class="container mx-auto px-4">
-				<h2 class="text-3xl font-bold text-center mb-12">Свяжитесь со мной</h2>
-				<div class="max-w-4xl mx-auto flex flex-col md:flex-row">
-					<div class="w-full md:w-1/2 mb-8 md:mb-0">
-						<h3 class="text-xl font-bold mb-4">Контактная информация</h3>
-						<p class="mb-2"><span class="font-semibold">Телефон:</span> +79617900137</p>
-						<p class="mb-2"><span class="font-semibold">Почта:</span> zevdokimova779@gmail.com</p>
-						<div class="mt-8">
-							<h3 class="text-xl font-bold mb-4">Социальные сети</h3>
-							<div class="flex space-x-4">
-								<a
-									href="https://t.me/Hilfmir637"
-									class="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white"
-									>VK</a
-								>
-								<a
-									href="https://vk.com/tosha637"
-									class="h-10 w-10 rounded-full bg-blue-800 flex items-center justify-center text-white"
-									>TG</a
-								>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Footer -->
-		<footer class="bg-gray-800 text-white py-8">
-			<div class="container mx-auto px-4 text-center">
-				<p>© 2025 Евдокимова Зоя. Все права защищены.</p>
-				<p class="mt-2 text-gray-400">Портфолио Архитектора</p>
-			</div>
-		</footer>
-		<script>
-			// Данные для графика
-			const years = [2025, 2030, 2035, 2040, 2045, 2066];
-			const positions = ['Помощник архитектора', 'Архитектор 3 категории', 'Архитектор 2 категории', 'Архитектор 1 категории', 'Архитектурный директор', 'Пенсия'];
-			const levels = [1, 2, 3, 4, 5, 6]; // Уровни для визуализации роста
-			
-			// Создание графика
-			const ctx = document.getElementById('careerChart').getContext('2d');
-			const careerChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: years,
-					datasets: [{
-						label: 'Карьерный рост архитектора',
-						data: levels,
-						backgroundColor: [
-							'rgba(72, 187, 120, 0.2)',
-							'rgba(72, 187, 120, 0.4)',
-							'rgba(66, 153, 225, 0.2)',
-							'rgba(66, 153, 225, 0.4)',
-							'rgba(159, 122, 234, 0.2)',
-							'rgba(236, 201, 75, 0.2)'
-						],
-						borderColor: 'rgba(66, 153, 225, 1)',
-						borderWidth: 3,
-						pointBackgroundColor: [
-							'rgba(72, 187, 120, 1)',
-							'rgba(72, 187, 120, 1)',
-							'rgba(66, 153, 225, 1)',
-							'rgba(66, 153, 225, 1)',
-							'rgba(159, 122, 234, 1)',
-							'rgba(236, 201, 75, 1)'
-						],
-						pointBorderColor: '#fff',
-						pointBorderWidth: 2,
-						pointRadius: 6,
-						fill: true,
-						tension: 0.3
-					}]
-				},
-				options: {
-					responsive: true,
-					maintainAspectRatio: false,
-					plugins: {
-						tooltip: {
-							callbacks: {
-								label: function(context) {
-									return positions[context.dataIndex];
-								}
-							}
-						},
-						legend: {
-							display: false
-						}
-					},
-					scales: {
-						y: {
-							beginAtZero: true,
-							max: 7,
-							ticks: {
-								callback: function(value) {
-									if (value <= 6 && value >= 1 && Number.isInteger(value)) {
-										return positions[value-1];
-									}
-									return '';
-								}
-							},
-							grid: {
-								color: 'rgba(0, 0, 0, 0.05)'
-							}
-						},
-						x: {
-							grid: {
-								color: 'rgba(0, 0, 0, 0.05)'
-							}
-						}
-					}
-				}
-			});
-		</script>
-	</body>
+      // Создание графика
+      const ctx = document.getElementById("careerChart").getContext("2d");
+      const careerChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "Карьерный рост архитектора",
+              data: levels,
+              backgroundColor: [
+                "rgba(72, 187, 120, 0.2)",
+                "rgba(72, 187, 120, 0.4)",
+                "rgba(66, 153, 225, 0.2)",
+                "rgba(66, 153, 225, 0.4)",
+                "rgba(159, 122, 234, 0.2)",
+                "rgba(236, 201, 75, 0.2)",
+              ],
+              borderColor: "rgba(66, 153, 225, 1)",
+              borderWidth: 3,
+              pointBackgroundColor: [
+                "rgba(72, 187, 120, 1)",
+                "rgba(72, 187, 120, 1)",
+                "rgba(66, 153, 225, 1)",
+                "rgba(66, 153, 225, 1)",
+                "rgba(159, 122, 234, 1)",
+                "rgba(236, 201, 75, 1)",
+              ],
+              pointBorderColor: "#fff",
+              pointBorderWidth: 2,
+              pointRadius: 6,
+              fill: true,
+              tension: 0.3,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return positions[context.dataIndex];
+                },
+              },
+            },
+            legend: {
+              display: false,
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 7,
+              ticks: {
+                callback: function (value) {
+                  if (value <= 6 && value >= 1 && Number.isInteger(value)) {
+                    return positions[value - 1];
+                  }
+                  return "";
+                },
+              },
+              grid: {
+                color: "rgba(0, 0, 0, 0.05)",
+              },
+            },
+            x: {
+              grid: {
+                color: "rgba(0, 0, 0, 0.05)",
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
 </html>

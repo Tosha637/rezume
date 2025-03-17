@@ -1,0 +1,4 @@
+bun.lock
+tailwind.config.js
+node_modules
+package.json
