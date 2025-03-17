@@ -671,6 +671,12 @@
 
         <!-- Карточки с описанием -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="col-span-full border-t-2 border-gray-300 my-4 relative">
+            <span
+              class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-lg font-bold"
+              >Колледж</span
+            >
+          </div>
           <div class="bg-green-200 p-4 rounded-lg border-l-4 border-green-300">
             <h3 class="font-bold text-lg mb-1">Помощник архитектора</h3>
             <div class="text-sm text-green-800 mb-2">2025</div>
@@ -680,24 +686,12 @@
             </p>
           </div>
 
-          <div class="bg-green-500 p-4 rounded-lg border-l-4 border-green-600">
-            <h3 class="font-bold text-lg mb-1">Архитектор 3 категории</h3>
-            <div class="text-sm text-green-800 mb-2">2030</div>
-            <p class="text-gray-700 text-sm">
-              Самостоятельная работа над проектами среднего масштаба, развитие
-              собственного стиля.
-            </p>
+          <div class="col-span-full border-t-2 border-gray-300 my-4 relative">
+            <span
+              class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-lg font-bold"
+              >Университет</span
+            >
           </div>
-
-          <div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
-            <h3 class="font-bold text-lg mb-1">Архитектор 2 категории</h3>
-            <div class="text-sm text-blue-800 mb-2">2035</div>
-            <p class="text-gray-700 text-sm">
-              Руководство проектными группами, работа над сложными и масштабными
-              объектами.
-            </p>
-          </div>
-
           <div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
             <h3 class="font-bold text-lg mb-1">Архитектор 1 категории</h3>
             <div class="text-sm text-blue-800 mb-2">2040</div>
@@ -706,7 +700,28 @@
               архитектурными решениями.
             </p>
           </div>
-
+          <div class="col-span-full border-t-2 border-gray-300 my-4 relative">
+            <span
+              class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-lg font-bold"
+              >Повышение квалификации</span
+            >
+          </div>
+          <div class="bg-blue-500 p-4 rounded-lg border-l-4 border-blue-600">
+            <h3 class="font-bold text-lg mb-1">Архитектор 2 категории</h3>
+            <div class="text-sm text-blue-800 mb-2">2035</div>
+            <p class="text-gray-700 text-sm">
+              Руководство проектными группами, работа над сложными и масштабными
+              объектами.
+            </p>
+          </div>
+          <div class="bg-green-500 p-4 rounded-lg border-l-4 border-green-600">
+            <h3 class="font-bold text-lg mb-1">Архитектор 3 категории</h3>
+            <div class="text-sm text-green-800 mb-2">2030</div>
+            <p class="text-gray-700 text-sm">
+              Самостоятельная работа над проектами среднего масштаба, развитие
+              собственного стиля.
+            </p>
+          </div>
           <div
             class="bg-purple-500 p-4 rounded-lg border-l-4 border-purple-600"
           >
@@ -721,7 +736,7 @@
           <div
             class="bg-yellow-500 p-4 rounded-lg border-l-4 border-yellow-600"
           >
-            <h3 class="font-bold text-lg mb-1">Пенсия</h3>
+            <h3 class="font-bold text-lg mb-1">Старший архитектор</h3>
             <div class="text-sm text-yellow-800 mb-2">2066</div>
             <p class="text-gray-700 text-sm">
               Консультационная деятельность, участие в экспертных советах,
@@ -784,7 +799,7 @@
         new Glider(document.querySelector(".glider-1"), {
           slidesToShow: 1,
           slidesToScroll: 1,
-		  scrollLock: true,
+          scrollLock: true,
           draggable: true,
           dots: ".glider-1 + .glider-dots",
           arrows: {
@@ -806,7 +821,7 @@
         new Glider(document.querySelector(".glider-2"), {
           slidesToShow: 1,
           slidesToScroll: 1,
-		  scrollLock: true,
+          scrollLock: true,
           draggable: true,
           dots: ".glider-2 + .glider-dots",
           arrows: {
@@ -854,7 +869,7 @@
         "Архитектор 2 категории",
         "Архитектор 1 категории",
         "Архитектурный директор",
-        "Пенсия",
+        "Старший архитектор",
       ];
       const levels = [1, 2, 3, 4, 5, 6]; // Уровни для визуализации роста
 
